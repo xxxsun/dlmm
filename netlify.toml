@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions]
+  included_files = ["!node_modules/.cache/**"]
+
+# Realtime worker is NOT run as Netlify Function (would be ephemeral).
+# Deploy worker separately: e.g. Fly.io, Railway, Render, or Helius webhooks + small Node worker.
+
+[[redirects]]
+  from = "/api/realtime"
+  to = "/api/realtime"
+  status = 200
+  force = false
